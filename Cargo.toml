@@ -1,0 +1,12 @@
+[package]
+name = "nflog2es"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+clap = { version = "3.1.18", features = ["derive", "env"] }
+nflog = { git = "https://github.com/chifflier/nflog-rs", branch = "master" }
+libc = "0.2"
+
+[features]
