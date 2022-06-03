@@ -116,7 +116,6 @@ checksum = "349d5a591cd28b49e1d1037471617a32ddcda5731b99419008085f72d5a53836"
 [[package]]
 name = "nflog"
 version = "0.10.0"
-source = "git+https://github.com/chifflier/nflog-rs?branch=master#4092ff82aa9b96afbf5932bac9df559344adddf2"
 dependencies = [
  "bitflags",
  "libc",
@@ -126,7 +125,6 @@ dependencies = [
 [[package]]
 name = "nflog-sys"
 version = "0.10.0"
-source = "git+https://github.com/chifflier/nflog-rs?branch=master#4092ff82aa9b96afbf5932bac9df559344adddf2"
 dependencies = [
  "cc",
  "libc",
@@ -146,7 +144,6 @@ dependencies = [
 [[package]]
 name = "nfnetlink-sys"
 version = "0.10.0"
-source = "git+https://github.com/chifflier/nflog-rs?branch=master#4092ff82aa9b96afbf5932bac9df559344adddf2"
 dependencies = [
  "cc",
  "libc",

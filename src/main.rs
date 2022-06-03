@@ -34,7 +34,7 @@ fn main() {
                 .value_name("ES_HOST")
                 .long("es_host")
                 .env("ES_HOST")
-                .required(true)
+                .required(false)
                 .help("ElasticSearch URL"),
         )
         .arg(
@@ -44,7 +44,7 @@ fn main() {
                 .long("es_user")
                 .short('u')
                 .env("ES_USER")
-                .required(true)
+                .required(false)
                 .help("ElasticSearch username"),
         )
         .arg(
@@ -54,7 +54,7 @@ fn main() {
                 .long("es_pass")
                 .short('p')
                 .env("ES_PASS")
-                .required(true)
+                .required(false)
                 .help("ElasticSearch password"),
         )
         .arg(
@@ -68,10 +68,9 @@ fn main() {
                 .help("nflog group number"),
         )
         .get_matches();
-
-    let es_host: &str = matches.value_of("es_host").unwrap();
-    let es_user: &str = matches.value_of("es_user").unwrap();
-    let es_pass: &str = matches.value_of("es_pass").unwrap();
+    //let es_host: &str = matches.value_of("es_host").unwrap();
+    //let es_user: &str = matches.value_of("es_user").unwrap();
+    //let es_pass: &str = matches.value_of("es_pass").unwrap();
     let groups: Vec<u16> = matches.values_of_t("group").unwrap();
 
     let queue = nflog::Queue::open().unwrap();
@@ -82,8 +81,10 @@ fn main() {
 
     queue.bind(libc::AF_INET).unwrap();
 
-    for g in groups {
-        let mut group = queue.bind_group(g).unwrap();
+    let mut log_groups = Vec::new();
+
+    for g in &groups {
+        let mut group = queue.bind_group(*g).unwrap();
 
         group.set_mode(nflog::CopyMode::Packet, 0xffff);
         //group.set_nlbufsiz(0xffff);
@@ -92,6 +93,7 @@ fn main() {
         group.set_flags(nflog::Flags::Sequence);
 
         group.set_callback(Box::new(log_callback));
+        log_groups.push(group)
     }
     queue.run_loop();
 }

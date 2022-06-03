@@ -6,7 +6,8 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "3.1.18", features = ["derive", "env"] }
-nflog = { git = "https://github.com/chifflier/nflog-rs", branch = "master" }
+#nflog = { git = "https://github.com/chifflier/nflog-rs", branch = "master" }
+nflog = { path = "../nflog-rs" }
 libc = "0.2"
 
 [features]
